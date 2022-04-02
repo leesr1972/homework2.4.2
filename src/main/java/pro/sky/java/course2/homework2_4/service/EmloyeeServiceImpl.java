@@ -5,11 +5,11 @@ import pro.sky.java.course2.homework2_4.Employee;
 
 @Service
 public class EmloyeeServiceImpl implements EmployeeService {
-    private Employee[] staffOfEmployee = new Employee[10];
+    private Employee[] staffOfEmployee;
     private int sizeOfStaff;
 
     public void EmployeeServiceImpl() {
-        this.staffOfEmployee = new Employee[10];
+        this.staffOfEmployee = new Employee[3];
     }
 
     @Override
