@@ -5,7 +5,7 @@ import pro.sky.java.course2.homework2_4.Employee;
 
 @Service
 public class EmloyeeServiceImpl implements EmployeeService {
-    private Employee[] staffOfEmployee;
+    private Employee[] staffOfEmployee = new Employee[3];
     private int sizeOfStaff;
 
     public void EmployeeServiceImpl() {
@@ -13,8 +13,7 @@ public class EmloyeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public String addEmployee(String firstName, String lastName) throws InternalServerError, BadRequest {
-        EmployeeServiceImpl();
+    public Employee addEmployee(String firstName, String lastName) {
         if (sizeOfStaff >= staffOfEmployee.length) {
             throw new InternalServerError();
         }
@@ -30,14 +29,14 @@ public class EmloyeeServiceImpl implements EmployeeService {
             if (staffOfEmployee[i] == null) {
                 staffOfEmployee[i] = newEmployee;
                 sizeOfStaff++;
-                return firstName + " " + lastName + " is hired.";
+                return newEmployee;
             }
         }
-        return newEmployee.toString();
+        return null;
     }
 
     @Override
-    public String dismissEmployee(String firstName, String lastName) throws NotFound{
+    public Employee dismissEmployee(String firstName, String lastName) {
         Employee dismissedEmployee = new Employee(firstName, lastName);
         for (int j = 0; j < staffOfEmployee.length; j++) {
             dismissedEmployee = staffOfEmployee[j];
@@ -45,7 +44,7 @@ public class EmloyeeServiceImpl implements EmployeeService {
                 if (dismissedEmployee.getFirstName().equals(firstName) && dismissedEmployee.getLastName().equals(lastName)) {
                     staffOfEmployee[j] = null;
                     sizeOfStaff--;
-                    return firstName + " " + lastName + " is dismissed.";
+                    return dismissedEmployee;
                 } else {
                     dismissedEmployee = null;
                 }
@@ -54,17 +53,17 @@ public class EmloyeeServiceImpl implements EmployeeService {
         if (dismissedEmployee == null) {
             throw new NotFound();
         }
-        return dismissedEmployee.toString();
+        return null;
     }
 
     @Override
-    public String findEmloyee(String firstName, String lastName) throws BadRequest{
+    public Employee findEmloyee(String firstName, String lastName) {
         Employee employee = new Employee(firstName, lastName);
         for (int i = 0; i < staffOfEmployee.length; i++) {
             if (staffOfEmployee[i] != null) {
                 employee = staffOfEmployee[i];
                 if (employee.getFirstName().equals(firstName) && employee.getLastName().equals(lastName)) {
-                    return firstName + " " + lastName + " is found.";
+                    return employee;
                 } else {
                     employee = null;
                 }
@@ -73,6 +72,6 @@ public class EmloyeeServiceImpl implements EmployeeService {
         if (employee == null) {
             throw new BadRequest();
         }
-       return employee.toString();
+        return null;
     }
 }
