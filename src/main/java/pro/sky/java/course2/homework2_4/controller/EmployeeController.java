@@ -19,7 +19,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/add")
-    public String addEmployee(@RequestParam String firstName, @RequestParam String lastName) {
+    public String addNewEmployee(@RequestParam String firstName, @RequestParam String lastName) {
         try {
             employeeService.addEmployee(firstName, lastName);
         } catch (InternalServerError e) {
@@ -41,10 +41,10 @@ public class EmployeeController {
     }
 
     @GetMapping("/find")
-    public String findEmloyee(@RequestParam String firstName, @RequestParam String lastName) {
+    public String findStaff(@RequestParam String firstName, @RequestParam String lastName) {
         try {
             employeeService.findEmloyee(firstName, lastName);
-        } catch (NotFound e) {
+        } catch (BadRequest e) {
             System.out.println("Такой сотрудник не найден.");
         }
         return employeeService.findEmloyee(firstName, lastName);
